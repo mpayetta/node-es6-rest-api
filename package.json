@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mpayetta/node-es6-rest-api.git"
-  }
+  },
   "dependencies": {
     "async": "^2.0.1",
     "bcrypt": "^0.8.7",
