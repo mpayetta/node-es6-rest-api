@@ -15,7 +15,7 @@ app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
     res.status(err.status).json(err);
   } else {
-    res.status(err.status)
+    res.status(500)
       .json({
         status: err.status,
         message: err.message

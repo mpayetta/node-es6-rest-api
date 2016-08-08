@@ -4,13 +4,19 @@ function load(req, res, next, id) {
   User.findById(id)
     .exec()
     .then((user) => {
-      req.dbTask = user;
+      if (!user) {
+        return res.status(404).json({
+          status: 400,
+          message: "User not found"
+        });
+      }
+      req.dbUser = user;
       return next();
     }, (e) => next(e));
 }
 
 function get(req, res) {
-  return res.json(req.dbTask);
+  return res.json(req.dbUser);
 }
 
 function create(req, res, next) {
@@ -24,7 +30,7 @@ function create(req, res, next) {
 }
 
 function update(req, res, next) {
-  const user = req.dbTask;
+  const user = req.dbUser;
   Object.assign(user, req.body);
 
   user.save()
@@ -43,7 +49,7 @@ function list(req, res, next) {
 }
 
 function remove(req, res, next) {
-  const user = req.dbTask;
+  const user = req.dbUser;
   user.remove()
     .then(() => res.sendStatus(204),
       (e) => next(e));

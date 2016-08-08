@@ -70,3 +70,11 @@ gulp.task('test', ['set-env'], () => {
 gulp.task('mocha', ['clean'], () => {
   return runSequence('babel', 'test');
 });
+
+gulp.task('apidoc', (done) => {
+  plugins.apidoc({
+    src: 'server/routes/',
+    dest: 'docs/',
+    config: ''
+  }, done);
+});
